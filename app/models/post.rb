@@ -23,5 +23,13 @@ class Post < ActiveRecord::Base
     inverse_of: :posts
   )
 
-  has_many :comments, dependent: :destroy
+  has_many :comments, inverse_of: :post, dependent: :destroy
+
+  def comments_by_parent_id
+    @cpid = Hash.new { |h,k| h[k] = [] }
+    comments.each do |comment|
+      @cpid[comment.parent_id] << comment
+    end
+    @cpid
+  end
 end

@@ -4,3 +4,10 @@
 <%= render 'shared/edit_delete', post: @post %>
 <hr>
 <%= @post.content %>
+<hr>
+
+<%= button_to "Add a comment", new_post_comment_url(@post) %>
+
+<% @post.comments_by_parent_id[nil].each do |comment| %>
+  <%= render 'nested_comment', comment: comment, post: @post, level: 1, action: @action %>
+<% end %>

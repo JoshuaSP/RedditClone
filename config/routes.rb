@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'comment/new'
-
-  get 'comment/edit'
-
   root 'sessions#new'
 
   resource :user, only: [:create, :new, :show]
@@ -10,6 +6,10 @@ Rails.application.routes.draw do
   resources :subs, except: [:destroy] do
     resources :posts, only: [:new, :create]
   end
-  resources :posts, except: [:index, :new, :create]
-
+  resources :posts, except: [:index, :new, :create] do
+    resources :comments, only: [:new, :create]
+  end
+  resources :comments, only: [:edit, :update] do
+    resources :comments, only: [:new, :create]
+  end
 end

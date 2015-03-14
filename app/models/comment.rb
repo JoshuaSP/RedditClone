@@ -13,8 +13,10 @@
 
 class Comment < ActiveRecord::Base
   validates :post_id, :author_id, :content, presence: true
+  validate :is_child_of_correct_post
+  after_initialize :set_post
 
-  belongs_to :post, inverse_of: :comment
+  belongs_to :post, inverse_of: :comments
   belongs_to(
     :author,
     class_name: :User,
@@ -30,4 +32,14 @@ class Comment < ActiveRecord::Base
     class_name: :Comment,
     foreign_key: :parent_id
   )
+
+  def is_child_of_correct_post
+    parent_comment.nil? || post == parent_comment.post
+  end
+
+  def set_post
+    if parent_comment
+      self.post_id = parent_comment.post_id
+    end
+  end
 end

@@ -1,4 +1,4 @@
 <h1>Edit Post</h1>
-<h3>in: <%= subs.map { |sub| sub.name }.join(", ") %> </h3>
+<h3>in: <%= @post.subs.map { |sub| sub.name }.join(", ") %> </h3>
 <hr>
 <%= render 'form', creating: false, post: @post %>
