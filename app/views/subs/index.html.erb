@@ -1,0 +1,9 @@
+<h1>Sub Redditerests:</h1>
+<hr>
+<%= link_to "Create new sub", new_sub_url %>
+<br>
+<% @subs.each do |sub| %>
+  <div class="sub">
+    <%= link_to sub.name, sub_url(sub) %>
+  </div>
+<% end %>

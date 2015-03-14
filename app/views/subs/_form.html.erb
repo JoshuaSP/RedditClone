@@ -1,0 +1,16 @@
+<form class="create" action="<%= creating ? subs_url : sub_url(sub) %>" method="post">
+  <%= render 'shared/csrf' %>
+  <%= render 'shared/patching' unless creating %>
+
+  <label>Name:
+    <input type="text" name="sub[name]" value="<%= sub.name %>">
+  </label>
+  <br>
+
+  <label>Description:
+    <textarea name="sub[description]" rows="8" cols="40"
+      placeholder="Describe sub here"><%= sub.description %></textarea>
+  </label>
+
+  <input type="submit" name="Submit">
+</form>

@@ -1,0 +1,25 @@
+<form class="post" action="<%= creating ? sub_posts_url : post_url(post) %>" method="post">
+  <%= render "shared/patching" unless creating %>
+  <%= render "shared/csrf" %>
+
+  <label>Title:
+    <input type="text" name="post[title]" value="<%= post.title %>">
+  </label>
+  <br>
+
+  <label>Body:
+    <textarea name="post[content]"
+      placeholder="Type the body of your post here"><%= post.content %></textarea>
+  </label>
+
+  Subs:
+  <% Sub.all.each do |sub| %>
+    <label>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>"
+        <%= "checked" if post.subs.include?(sub) %> >
+      <%= sub.name %>
+    </label>
+  <% end %>
+
+  <input type="submit" name="Submit">
+</form>

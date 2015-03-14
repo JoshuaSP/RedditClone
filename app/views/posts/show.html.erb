@@ -1,0 +1,6 @@
+<h1><%= @post.title %> </h1>
+<h3>in: <%= @post.subs.map { |sub| link_to(sub.name, sub_url(sub)) }.join(", ").html_safe %> </h3>
+<br>
+<%= render 'shared/edit_delete', post: @post %>
+<hr>
+<%= @post.content %>

@@ -1,0 +1,19 @@
+<form action="<%= new_user ? user_url : session_url %>" method="post">
+  <%= render "shared/csrf" %>
+  <label>Username:
+    <input type="text" name="user[username]" value="<%= user.username %>">
+  </label>
+  <br>
+  <% if new_user %>
+    <label>Email:
+      <input type="text" name="user[email]" value="<%= user.email %>">
+      <br>
+    </label>
+  <% end %>
+
+  <label>Password
+    <input type="password" name="user[password]">
+  </label>
+
+  <input type="submit" name="Submit">
+</form>

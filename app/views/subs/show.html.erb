@@ -1,0 +1,12 @@
+<%= button_to "List of Subs", subs_url, method: :get %>
+<h1><%= @sub.name %></h1>
+<h3><%= @sub.description %></h3>
+<hr>
+<%= button_to "Create new post", new_sub_post_url(@sub), method: :get %>
+
+<% @sub.posts.each do |post| %>
+  <div class="post">
+    <%= link_to post.title, post_url(post) %>
+    <%= render 'shared/edit_delete', post: post %>
+  </div>
+<% end %>

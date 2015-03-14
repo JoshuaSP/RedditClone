@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redditerest</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% flash.each do |name, msgs| %>
+  <% msgs.each do |msg| %>
+    <%= content_tag(:div, msg, class: "flash_message") %>
+  <% end %>
+<% end  %>
+
+<% if current_user  %>
+  <%= button_to "Log Out", session_url, method: :delete %>
+<% else %>
+  <%= button_to "Log In", new_session_url, method: :get %> <%= button_to "Sign Up", new_user_url, method: :get %>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
