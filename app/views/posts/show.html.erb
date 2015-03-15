@@ -1,13 +1,54 @@
+<script>
+  function addComment(id) {
+    var selector = id ? ".comment#" + id : ".post"
+    $(selector).append(
+      $("div.comment_form").show()
+    )
+    $("form.comment_form").attr("action", function () {
+      return id ? "<%= root_url %>/comments/" + id + "/comments" : "<%= post_comments_url(@post) %>"
+    })
+  }
+
+  function editComment(id) {
+    var selector = ".comment#" + id
+    var comment = $(selector + " .content").text()
+    console.log(comment)
+    $(".comment:hidden").show()
+    $(selector)
+      .hide()
+      .after(
+        $("div.comment_form").show()
+      )
+    $("form.comment_form ")
+      .attr("action", function () {
+        return "<%= root_url %>/comments/" + id
+      })
+      .append("<input type='hidden' name='_method' value='patch'>")
+    $("textarea.comment_form").val(comment)
+  }
+</script>
+
+
 <h1><%= @post.title %> </h1>
 <h3>in: <%= @post.subs.map { |sub| link_to(sub.name, sub_url(sub)) }.join(", ").html_safe %> </h3>
 <br>
 <%= render 'shared/edit_delete', post: @post %>
 <hr>
-<%= @post.content %>
+<div class="post">
+  <%= @post.content %>
+</div>
 <hr>
 
-<%= button_to "Add a comment", new_post_comment_url(@post) %>
+<button onClick=addComment()> Add Comment </button>
 
 <% @post.comments_by_parent_id[nil].each do |comment| %>
   <%= render 'nested_comment', comment: comment, post: @post, level: 1, action: @action %>
 <% end %>
+
+<div class="comment_form", style="display:none;">
+  <form class="comment_form" method='post'>
+    <%= render 'shared/csrf' %>
+    <textarea class="comment_form" cols='100' rows='8' class='newcomment' name='comment[content]' value=''></textarea>
+    <input type='submit' name='Submit'>
+  </form>
+</div>

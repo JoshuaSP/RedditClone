@@ -1,23 +1,8 @@
-class CommentController < ApplicationController
-  include Findable
-
-  def new
-    @post =
-    @post = params[:post_id] ? Post.find(params[:post_id]) : Comment.find(params[:comment_id]).post
-    @comment = params[:post_id] ? @post.comments.new :
-  end
-
-  def edit
-    if @comment.author != current_user
-      flash[:errors] = ["You can't edit that comment"]
-      redirect_to post_url(@comment.post)
-    end
-  end
-
+class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_params)
-    @comment.parent = Comment.find(params[:comment_id])
-    @comment.post = Post.find(params[:post_id]) || @comment.parent_comment.post
+    @comment.parent_comment = params[:comment_id] ? Comment.find(params[:comment_id]) : nil
+    @comment.post = params[:post_id] ? Post.find(params[:post_id]) : @comment.parent_comment.post
     if @comment.save
       flash[:messages] = ["Comment created"]
       redirect_to post_url(@comment.post)
