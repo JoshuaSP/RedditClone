@@ -2,8 +2,22 @@
 <hr>
 <%= link_to "Create new sub", new_sub_url %>
 <br>
-<% @subs.each do |sub| %>
-  <div class="sub">
-    <%= link_to sub.name, sub_url(sub) %>
+<% firstcol = @subs[0...@subs.length/2] %>
+<% secondcol = @subs[@subs.length/2...@subs.length] %>
+<div class="row">
+  <div class="col-md-6">
+    <% firstcol.each do |sub| %>
+      <a href="<%= sub_url(sub) %>" class="sub">
+        <h4> <%= sub.name %> </h4>
+      </a>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-md-6">
+    <% secondcol.each do |sub| %>
+      <a href="<%= sub_url(sub) %>" class="sub">
+        <h4> <%= sub.name %> </h4>
+      </a>
+    <% end %>
+  </div>
+
+</div>

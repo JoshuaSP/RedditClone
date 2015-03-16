@@ -5,7 +5,7 @@
       $("div.comment_form").show()
     )
     $("form.comment_form").attr("action", function () {
-      return id ? "<%= root_url %>/comments/" + id + "/comments" : "<%= post_comments_url(@post) %>"
+      return id ? "<%= root_url %>comments/" + id + "/comments" : "<%= post_comments_url(@post) %>"
     })
   }
 

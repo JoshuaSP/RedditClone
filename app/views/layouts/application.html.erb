@@ -8,19 +8,40 @@
 </head>
 <body>
 
-<% flash.each do |name, msgs| %>
-  <% msgs.each do |msg| %>
-    <%= content_tag(:div, msg, class: "flash_message") %>
-  <% end %>
-<% end  %>
+<div class="container main">
+  <nav class="navbar navbar-inverse">
+    <div class="header">
 
-<% if current_user  %>
-  <%= button_to "Log Out", session_url, method: :delete %>
-<% else %>
-  <%= button_to "Log In", new_session_url, method: :get %> <%= button_to "Sign Up", new_user_url, method: :get %>
-<% end %>
+      <ul class="nav navbar-nav">
+        <li class="navbar-text" > <a class="h2 active" href="#"> Redditerest </a></li>
+        <li class=" navbar-text"> <a class="h2" href="<%= subs_url %>">Sub Redditerests</a> </li>
+      </ul>
+      <ul class="nav navbar-right nav-pills">
+        <% if current_user  %>
+          <li class="active navbar-text"><%= link_to "Log Out", session_url, class: "h5", method: :delete %></li>
+        <% else %>
+          <li class="active navbar-text"><%= link_to "Log In", new_session_url, class: "h5" %></li>
+          <li class="active navbar-text"><%= link_to "Sign Up", new_user_url, class: "h5" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 
-<%= yield %>
+
+  <% flash.each do |name, msgs| %>
+    <% msgs.each do |msg| %>
+      <%= content_tag(:div, msg, class: name + " jumbotron flash_message") %>
+    <% end %>
+  <% end  %>
+
+
+
+  <div class="container">
+    <%= yield %>
+
+  </div>
+</div>
+
 
 </body>
 </html>

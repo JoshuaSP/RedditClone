@@ -4,9 +4,12 @@
 <hr>
 <%= button_to "Create new post", new_sub_post_url(@sub), method: :get %>
 
-<% @sub.posts.each do |post| %>
-  <div class="post">
-    <%= link_to post.title, post_url(post) %>
-    <%= render 'shared/edit_delete', post: post %>
-  </div>
-<% end %>
+
+<div class="media">
+  <% @sub.posts.each do |post| %>
+    <div class="post media-left">
+      <%= link_to post.title, post_url(post) %>
+      <%= render 'shared/edit_delete', post: post %>
+    </div>
+  <% end %>
+</div>

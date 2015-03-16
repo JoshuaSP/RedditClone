@@ -1,19 +1,24 @@
 <form action="<%= new_user ? user_url : session_url %>" method="post">
   <%= render "shared/csrf" %>
-  <label>Username:
-    <input type="text" name="user[username]" value="<%= user.username %>">
-  </label>
-  <br>
-  <% if new_user %>
-    <label>Email:
-      <input type="text" name="user[email]" value="<%= user.email %>">
-      <br>
+  <div class="my form-group">
+    <label>Username:
+      <input class="form-control" type="text" name="user[username]" value="<%= user.username %>">
     </label>
-  <% end %>
+    <br>
+    <% if new_user %>
+      <br>
+      <label>Email:
+        <input class="form-control" type="text" name="user[email]" value="<%= user.email %>">
+        <br>
+      </label>
+    <% end %>
+    <br>
+    <label>Password
+      <input class="form-control" type="password" name="user[password]">
+    </label>
+    <br>
+    <br>
 
-  <label>Password
-    <input type="password" name="user[password]">
-  </label>
-
-  <input type="submit" name="Submit">
+    <input class="btn btn-default" type="submit" name="Submit">
+  </div>
 </form>

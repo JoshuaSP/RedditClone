@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+// @import "lavish";
+
+body {
+  background-color: #EEE6D9;
+}
+
+.container.main {
+  // width: 80%;
+}
+
+.site_name {
+  margin: 28px;
+}
+
+.navbar {
+  padding-right: 8px;
+}
+
+.navbar-nav {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+a.h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.navbar-text {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.nav-pills {
+  margin-top: -15px;
+}
+
+div.login {
+  @extend .col-md-4;
+  @extend .col-md-offset-4;
+  border-width: 2px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.centerform {
+  height: 70vh;
+  align-items: center;
+  display: flex;
+}
+
+a.sub {
+  @extend .h3;
+  @extend .btn;
+  width: 100%;
+  background-color: #AB6361;
+  padding: 0px;
+  &:hover {
+    background-color: #E2AB79;
+  }
+}
+
+.jumbotron.flash_message {
+  background-color: #97708A;
+  color: #ddd;
+}

@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment = Comment.find_by_id(params[:id])
     if @comment.update(comment_params)
       flash[:messages] = ["Comment updated"]
       redirect_to post_url(@comment.post)
